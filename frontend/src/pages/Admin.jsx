@@ -329,11 +329,16 @@ export default function Admin() {
             </label>
             <label>
               Category
-              <input
-                placeholder="e.g., Necklaces, Earrings"
+              <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              />
+                required
+              >
+                <option value="">Select a category</option>
+                <option value="Jewellary">Jewellary</option>
+                <option value="Sports Equipment">Sports Equipment</option>
+                <option value="Fashion">Fashion</option>
+              </select>
             </label>
             <div className="upload-section">
               <label>Product Image</label>

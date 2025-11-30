@@ -9,6 +9,7 @@ export default function Header({ onSearch }) {
   const [showPinModal, setShowPinModal] = useState(false)
   const [pinCode, setPinCode] = useState('')
   const [pinMessage, setPinMessage] = useState('')
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false)
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -94,7 +95,30 @@ export default function Header({ onSearch }) {
       <div className="nav__subnav">
         <span>Shop by</span>
         <nav>
-          <a href="#collections">Category</a>
+          <div className="category-dropdown">
+            <button 
+              type="button"
+              className="category-dropdown-btn"
+              onClick={() => setShowCategoryDropdown(!showCategoryDropdown)}
+            >
+              Category ▾
+            </button>
+            {showCategoryDropdown && (
+              <div className="category-dropdown-menu">
+                <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>All Categories</a>
+                <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>Jewellary</a>
+                <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>Sports Equipment</a>
+                <div className="category-submenu">
+                  <span className="category-submenu-label">Fashion ›</span>
+                  <div className="category-submenu-items">
+                    <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>Men</a>
+                    <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>Women</a>
+                    <a href="#collections" onClick={() => setShowCategoryDropdown(false)}>Kids</a>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <a href="#collections">Deals</a>
           <Link to="/admin">Sell</Link>
           <a href="#story">Story</a>
