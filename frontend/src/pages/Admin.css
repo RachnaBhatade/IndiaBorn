@@ -133,6 +133,7 @@
 .admin input[type="email"],
 .admin input[type="password"],
 .admin input[type="number"],
+.admin select,
 .admin textarea {
   padding: 0.75rem 1rem;
   border: 1px solid #e5e5e5;
@@ -144,6 +145,7 @@
 }
 
 .admin input:focus,
+.admin select:focus,
 .admin textarea:focus {
   outline: none;
   border-color: #1a1a1a;

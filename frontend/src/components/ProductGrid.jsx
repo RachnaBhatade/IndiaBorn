@@ -29,12 +29,13 @@ export default function ProductGrid() {
   }, [])
 
   const getImageUrl = (product) => {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5184';
     let imageUrl = product.images?.find(i => i.isPrimary)?.url ||
       product.images?.[0]?.url ||
       '/assets/brand-logo.jpeg'
     
     if (imageUrl.startsWith('/')) {
-      imageUrl = `http://localhost:5184${imageUrl}`
+      imageUrl = `${API_URL}${imageUrl}`
     }
     
     return imageUrl
@@ -121,7 +122,8 @@ export default function ProductGrid() {
             const discountPercent = hasDiscount ? Math.round((1 - current / original) * 100) : null
             
             const imageUrl = getImageUrl(product)
-            const fallbackUrl = 'http://localhost:5184/assets/brand-logo.jpeg'
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5184';
+            const fallbackUrl = `${API_URL}/assets/brand-logo.jpeg`
 
             return (
               <article key={product.id} className="product product--amazon">

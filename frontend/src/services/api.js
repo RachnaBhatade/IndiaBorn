@@ -1,4 +1,6 @@
-const API_BASE = '/api'
+// Use environment variable for API URL, fallback to relative path for development with Vite proxy
+const API_URL = import.meta.env.VITE_API_URL || '';
+const API_BASE = `${API_URL}/api`;
 
 export const api = {
   async get(url) {
