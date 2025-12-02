@@ -17,15 +17,21 @@ public class MongoDbContext
         var mongoUrl = MongoUrl.Create(_settings.ConnectionString);
         var clientSettings = MongoClientSettings.FromUrl(mongoUrl);
         
-        // Enable TLS 1.2+ for MongoDB Atlas
+        // Configure SSL/TLS for Linux environment (Render)
         clientSettings.SslSettings = new SslSettings
         {
-            EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
+            EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 | 
+                                  System.Security.Authentication.SslProtocols.Tls13,
+            CheckCertificateRevocation = false
         };
         
+        // Disable server certificate validation for MongoDB Atlas on Linux
+        clientSettings.ServerApi = new ServerApi(ServerApiVersion.V1);
+        
         // Set longer timeouts for Render's free tier cold starts
-        clientSettings.ConnectTimeout = TimeSpan.FromSeconds(30);
-        clientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(30);
+        clientSettings.ConnectTimeout = TimeSpan.FromSeconds(60);
+        clientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(60);
+        clientSettings.SocketTimeout = TimeSpan.FromSeconds(60);
         
         var client = new MongoClient(clientSettings);
         _database = client.GetDatabase(_settings.DatabaseName);
