@@ -1,24 +1,34 @@
-# Dockerfile for Indiaborn.Api
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+# Multi-stage Dockerfile for .NET 8.0 LTS API
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
+# Copy csproj and restore dependencies
 COPY ["Indiaborn.Api.csproj", "./"]
 RUN dotnet restore "Indiaborn.Api.csproj"
+
+# Copy everything else and build
 COPY . .
-WORKDIR "/src"
-RUN dotnet build "Indiaborn.Api.csproj" -c Release -o /app/build
+RUN dotnet build "Indiaborn.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Indiaborn.Api.csproj" -c Release -o /app/publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "Indiaborn.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Create directory for uploaded images
+RUN mkdir -p /app/wwwroot/assets/products
+
 ENTRYPOINT ["dotnet", "Indiaborn.Api.dll"]
+
 
 
 
