@@ -36,7 +36,7 @@
    JwtSettings__Issuer=IndiaBornAPI
    JwtSettings__Audience=IndiaBornClient
    JwtSettings__ExpiryMinutes=1440
-   ASPNETCORE_URLS=http://+:5000
+   ASPNETCORE_URLS=http://0.0.0.0:10000
    ```
 6. ✅ Click "Create Web Service"
 7. ✅ Wait for deployment (5-10 minutes)

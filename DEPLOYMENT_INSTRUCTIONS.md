@@ -91,7 +91,7 @@ NotificationSettings__MessengerToken=your_messenger_token
 NotificationSettings__TwilioAccountSid=your_twilio_sid
 NotificationSettings__TwilioAuthToken=your_twilio_token
 NotificationSettings__TwilioPhoneNumber=your_twilio_phone
-ASPNETCORE_URLS=http://+:5000
+ASPNETCORE_URLS=http://0.0.0.0:10000
 ```
 
 ### 2.6 Deploy

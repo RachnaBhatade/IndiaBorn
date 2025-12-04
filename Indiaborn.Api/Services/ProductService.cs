@@ -46,6 +46,15 @@ public class ProductService
             IsNewArrival = request.IsNewArrival,
             IsOnSale = request.IsOnSale,
             Category = request.Category,
+            SubCategory = request.SubCategory,
+            ProductType = request.ProductType,
+            Gender = request.Gender,
+            Sport = request.Sport,
+            Material = request.Material,
+            Brand = request.Brand,
+            AvailableSizes = request.AvailableSizes,
+            AvailableColors = request.AvailableColors,
+            Variants = request.Variants,
             Images = request.Images,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
@@ -67,6 +76,15 @@ public class ProductService
             .Set(p => p.IsNewArrival, request.IsNewArrival)
             .Set(p => p.IsOnSale, request.IsOnSale)
             .Set(p => p.Category, request.Category)
+            .Set(p => p.SubCategory, request.SubCategory)
+            .Set(p => p.ProductType, request.ProductType)
+            .Set(p => p.Gender, request.Gender)
+            .Set(p => p.Sport, request.Sport)
+            .Set(p => p.Material, request.Material)
+            .Set(p => p.Brand, request.Brand)
+            .Set(p => p.AvailableSizes, request.AvailableSizes)
+            .Set(p => p.AvailableColors, request.AvailableColors)
+            .Set(p => p.Variants, request.Variants)
             .Set(p => p.Images, request.Images)
             .Set(p => p.UpdatedAt, DateTime.UtcNow);
 
