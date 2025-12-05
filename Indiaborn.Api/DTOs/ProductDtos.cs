@@ -24,6 +24,15 @@ public class ProductRequest
     public bool IsNewArrival { get; set; }
     public bool IsOnSale { get; set; }
     public string Category { get; set; } = "Jewelry";
+    public string SubCategory { get; set; } = string.Empty;
+    public string ProductType { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
+    public string Sport { get; set; } = string.Empty;
+    public string Material { get; set; } = string.Empty;
+    public string Brand { get; set; } = string.Empty;
+    public List<string> AvailableSizes { get; set; } = new();
+    public List<string> AvailableColors { get; set; } = new();
+    public List<ProductVariant> Variants { get; set; } = new();
     public List<ProductImage> Images { get; set; } = new();
 }
 

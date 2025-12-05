@@ -12,28 +12,7 @@ public class MongoDbContext
     public MongoDbContext(IOptions<MongoSettings> settings)
     {
         _settings = settings.Value;
-        
-        // Configure MongoDB client settings for SSL/TLS
-        var mongoUrl = MongoUrl.Create(_settings.ConnectionString);
-        var clientSettings = MongoClientSettings.FromUrl(mongoUrl);
-        
-        // Configure SSL/TLS for Linux environment (Render)
-        clientSettings.SslSettings = new SslSettings
-        {
-            EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12 | 
-                                  System.Security.Authentication.SslProtocols.Tls13,
-            CheckCertificateRevocation = false
-        };
-        
-        // Disable server certificate validation for MongoDB Atlas on Linux
-        clientSettings.ServerApi = new ServerApi(ServerApiVersion.V1);
-        
-        // Set longer timeouts for Render's free tier cold starts
-        clientSettings.ConnectTimeout = TimeSpan.FromSeconds(60);
-        clientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(60);
-        clientSettings.SocketTimeout = TimeSpan.FromSeconds(60);
-        
-        var client = new MongoClient(clientSettings);
+        var client = new MongoClient(_settings.ConnectionString);
         _database = client.GetDatabase(_settings.DatabaseName);
     }
 
