@@ -54,7 +54,7 @@ builder.Services.AddHttpClient("messenger");
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi();
+// OpenAPI removed for .NET 8.0 compatibility
 
 // Add CORS
 builder.Services.AddCors(options =>
@@ -85,10 +85,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// OpenAPI endpoint removed for .NET 8.0 compatibility
 
 // Only redirect to HTTPS in production (hosting platforms handle this)
 if (!app.Environment.IsDevelopment())
