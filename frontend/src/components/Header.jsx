@@ -72,6 +72,7 @@ export default function Header({ onSearch, onCategoryFilter, onPriceFilter }) {
             <strong>Indiaborn™</strong>
           </div>
         </Link>
+        
         <div className="nav__icons">
           <a className="nav__link" href="#order-history">Sign in ›</a>
           <button

@@ -10,10 +10,6 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:5184',
         changeOrigin: true
-      },
-      '/assets': {
-        target: 'http://localhost:5184',
-        changeOrigin: true
       }
     }
   },
